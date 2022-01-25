@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 
 
 public class Livro implements Serializable {
-    private static final long SerialVersionUID = 1L;
+    private static final long SerialVersionUID = 1L; // verificar essa questão
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

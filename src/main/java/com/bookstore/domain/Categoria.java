@@ -17,7 +17,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Categoria implements Serializable {
-   private static final long SerialVersionUID = 1L;
+   private static final long SerialVersionUID = 1L; // verificar essa questão
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Integer id;
