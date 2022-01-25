@@ -37,12 +37,6 @@ public class Categoria implements Serializable {
         this.descricao = descricao;
         this.livros = livros;
     }
-
-  
-
-  
-
-
     public Integer getId() {
         return this.id;
     }
