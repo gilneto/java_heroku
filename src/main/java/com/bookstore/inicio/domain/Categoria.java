@@ -10,27 +10,37 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
 
-@Entity  // usando isso eu posso passar o nome para a tabela @entity(name="")
-public class Categoria implements Serializable{
-  private static final long serialVersionUID = 1L;
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer id;
-  private String nome;
-  private String descricao;
-  @OneToMany(mappedBy = "categoria")
-  private List<Livro> livros = new ArrayList<>();
+import org.hibernate.validator.constraints.Length;
 
-  public Categoria(){
-      super();
-  }
-  public Categoria(Integer id, String nome, String descricao) {
-    super();
-    this.id = id;
-    this.nome = nome;
-    this.descricao = descricao;
-  }
+@Entity // usando isso eu posso passar o nome para a tabela @entity(name="")
+public class Categoria implements Serializable {
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @NotEmpty(message = "O campo NOME é requirido!")
+    @Length(min = 3, max = 100, message = "O campo deve ter entre 3 e 100 caracteres!")
+    private String nome;
+
+    @NotEmpty(message = "O campo DESCRIÇÃO é requirido!")
+    @Length(min = 3, max = 200, message = "O campo deve ter entre 3 e 200 caracteres!")
+    private String descricao;
+    @OneToMany(mappedBy = "categoria")
+    private List<Livro> livros = new ArrayList<>();
+
+    public Categoria() {
+        super();
+    }
+
+    public Categoria(Integer id, String nome, String descricao) {
+        super();
+        this.id = id;
+        this.nome = nome;
+        this.descricao = descricao;
+    }
 
     public Integer getId() {
         return this.id;
@@ -64,7 +74,6 @@ public class Categoria implements Serializable{
         this.livros = livros;
     }
 
-
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -91,4 +100,3 @@ public class Categoria implements Serializable{
     }
 
 }
-

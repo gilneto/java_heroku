@@ -2,6 +2,7 @@ package com.bookstore.inicio.resources.exceptions;
 
 import javax.servlet.ServletRequest;
 
+import com.bookstore.inicio.exceptions.DataIntegrityViolationException;
 import com.bookstore.inicio.exceptions.ObjectNotFoundException;
 
 import org.springframework.http.HttpStatus;
@@ -16,5 +17,12 @@ public class ResourceExceptionHandler {
         StandardError error = new StandardError(System.currentTimeMillis(), HttpStatus.NOT_FOUND.value(),
                 e.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<StandardError> dataIntegrityViolationException(DataIntegrityViolationException e, ServletRequest request) {
+        StandardError error = new StandardError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(),
+                e.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 }
